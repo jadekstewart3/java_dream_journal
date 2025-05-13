@@ -5,7 +5,6 @@ import java.time.LocalDate;
 public class DreamJournal {
   public static void  main(String[] args) {
     Scanner scanner = new Scanner(System.in); //read user input from keyboard
-    File dreamFile = new File("dreams.txt"); //create a file object
     boolean running = true; //flag to control the loop
 
     while (running) {
@@ -44,19 +43,39 @@ public class DreamJournal {
         System.out.println("An error occurred while saving your dream.");
         e.printStackTrace(); //print the stack trace for debugging 
       }
+
       } else if (menuChoice.equals("2")) {
         //handle reading dreams from dreams.txt
         System.out.println("Here are all your dreams in the clouds:");
+
+        File dreamFile = new File("dreams.txt"); //create a file 
+        //check if the file exists
+        if (!dreamFile.exists()){
+          System.out.println("No dreams found in the clouds. Start dreaming!");
+        } else {
+          try {
+            BufferedReader reader = new BufferedReader(new FileReader(dreamFile)); //open the file for reading
+            String line; //string to hold each line
+
+            while (( line = reader.readLine()) != null) { //read each line until the end of the file
+              System.out.println(line); //print the line
+            }
+            reader.close(); //close the file
+          } catch (IOException e) {
+            System.out.println("An error occurred while reading your dreams.");
+            e.printStackTrace(); //print the stack trace for debugging
+          }
+        }
 
       } else if (menuChoice.equals("3")) {
         //handle exiting the program
         System.out.println("Goodbye!");
         running = false; //sets flag to exit the loop
+
       } else {
         //handle invalid input
         System.out.println("Invalid choice. Please try again.");
       }
-
     }
     scanner.close(); //close the scanner
   }
