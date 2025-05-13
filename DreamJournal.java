@@ -16,7 +16,7 @@ public class DreamJournal {
       System.out.println("3. EXIT");
       System.out.print("Enter your choice (1-3): ");
 
-      String choice = scanner.nextLine(); //read user input
+      String menuChoice = scanner.nextLine(); //read user input
 
       if (menuChoice.equals("1")) {
         //handle writing a new dream entry
